@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="InAppKeyboard.KeyboardView" parent="">
+
+    </style>
+
+
+    <style name="InAppKeyboard.KeyboardView.KeyStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="background">@drawable/key_bg</item>
+
+        <item name="backgroundTint">@drawable/key_bg</item>
+        <item name="android:backgroundTint">@drawable/key_bg</item>
+
+        <item name="android:textColor">@drawable/key_text_color</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:capitalize">none</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+
+
+</resources>

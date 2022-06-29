@@ -1,0 +1,94 @@
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
+        classpath 'org.jetbrains.kotlin:kotlin-android-extensions:1.6.21'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+ext {
+    libraryName = 'InAppKeyboard'
+    libraryDescription = 'Keyboard view to be used in a Fragment'
+    libraryVersion = '0.1.0'
+    artifact = 'in-app-keyboard'
+    developerId = 'drakorbofh'
+    developerName = 'Fernando Anthony Ristaño'
+    developerEmail = 'fernando.ristano@gmail.com'
+    publishedGroupId = 'com.fristano.android'
+    siteUrl = 'https://github.com/DrakorBofh/InAppKeyboard'
+    gitUrl = 'https://github.com/DrakorBofh/InAppKeyboard.git'
+    bintrayRepo = 'maven'
+    bintrayName = 'in-app-keyboard'
+    licenseName = 'MIT License'
+    allLicenses = ['MIT']
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    failOnError = false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.getDestinationDir()
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
